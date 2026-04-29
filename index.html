@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zero 2 Sixty — Informe de Marketing | Abril 2026</title>
+<style>
+  :root {
+    --red: #dc2626;
+    --dark: #0d0d0d;
+    --dark2: #161616;
+    --dark3: #1f1f1f;
+    --dark4: #2a2a2a;
+    --border: rgba(255,255,255,.08);
+    --text: #e8e8e8;
+    --muted: #888;
+    --green: #22c55e;
+    --amber: #f59e0b;
+    --blue: #3b82f6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  /* ── HEADER ── */
+  .report-header {
+    background: var(--dark2);
+    border-bottom: 3px solid var(--red);
+    padding: 52px 40px 40px;
+    text-align: center;
+  }
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 14px;
+  }
+  .report-header h1 {
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 1.1;
+    margin-bottom: 10px;
+  }
+  .report-header h1 span { color: var(--red); }
+  .report-header .subtitle {
+    font-size: 15px;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+  .meta-pills {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .pill {
+    background: var(--dark3);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 5px 16px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .pill strong { color: var(--text); }
+
+  /* ── SUMMARY BAR ── */
+  .summary-bar {
+    background: var(--dark3);
+    border-bottom: 1px solid var(--border);
+    padding: 32px 40px;
+    display: flex;
+    justify-content: center;
+    gap: 56px;
+    flex-wrap: wrap;
+  }
+  .stat { text-align: center; }
+  .stat .num {
+    font-size: 38px;
+    font-weight: 800;
+    color: var(--red);
+    line-height: 1;
+    display: block;
+  }
+  .stat .num.green { color: var(--green); }
+  .stat .num.amber { color: var(--amber); }
+  .stat .lbl {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    margin-top: 5px;
+  }
+
+  /* ── ALERT BANNER ── */
+  .alert-banner {
+    background: rgba(220,38,38,.08);
+    border-top: 1px solid rgba(220,38,38,.25);
+    border-bottom: 1px solid rgba(220,38,38,.25);
+    padding: 16px 40px;
+    text-align: center;
+    font-size: 14px;
+    color: #f0a0a0;
+  }
+  .alert-banner strong { color: #fff; }
+
+  /* ── CONTAINER ── */
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* ── INTRO BLOCK ── */
+  .intro-block {
+    background: var(--dark2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--red);
+    border-radius: 8px;
+    padding: 28px 32px;
+    margin: 48px 0 0;
+    font-size: 15px;
+    color: #ccc;
+    line-height: 1.7;
+  }
+  .intro-block strong { color: var(--text); }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-top: 56px;
+    margin-top: 48px;
+    border-top: 1px solid var(--border);
+  }
+  .section-header:first-of-type { border-top: none; }
+  .section-num {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--red);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .section-header h2 {
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .section-tag {
+    margin-left: auto;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  .tag-working { background: rgba(34,197,94,.1); color: var(--green); border: 1px solid rgba(34,197,94,.2); }
+  .tag-urgent  { background: rgba(220,38,38,.1); color: #f87171; border: 1px solid rgba(220,38,38,.2); }
+  .tag-intel   { background: rgba(59,130,246,.1); color: #93c5fd; border: 1px solid rgba(59,130,246,.2); }
+  .tag-now     { background: rgba(245,158,11,.1); color: #fcd34d; border: 1px solid rgba(245,158,11,.2); }
+
+  /* ── WIN CARD ── */
+  .win-card {
+    background: var(--dark2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+  .win-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: rgba(34,197,94,.1);
+    border: 1px solid rgba(34,197,94,.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .win-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .win-card p { font-size: 14px; color: #aaa; line-height: 1.55; }
+  .win-card .metric-row {
+    display: flex;
+    gap: 24px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
+  .metric-chip {
+    background: var(--dark3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 14px;
+    text-align: center;
+  }
+  .metric-chip .val { font-size: 20px; font-weight: 800; color: var(--green); display: block; }
+  .metric-chip .val.red { color: var(--red); }
+  .metric-chip .key { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+
+  /* ── PROBLEM CARD ── */
+  .problem-card {
+    background: var(--dark2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 20px;
+  }
+  .problem-card-header {
+    padding: 18px 24px;
+    background: var(--dark3);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .problem-letter {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: var(--red);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .problem-letter.amber { background: var(--amber); color: #000; }
+  .problem-letter.blue  { background: var(--blue); }
+  .problem-card-header h3 { font-size: 15px; font-weight: 700; }
+  .problem-card-body { padding: 22px 24px; }
+  .problem-card-body p { font-size: 14px; color: #aaa; line-height: 1.6; margin-bottom: 10px; }
+  .problem-card-body p:last-child { margin-bottom: 0; }
+  .impact-box {
+    background: rgba(220,38,38,.06);
+    border: 1px solid rgba(220,38,38,.15);
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #d4a4a4;
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .impact-box .arrow { color: var(--red); font-weight: 700; flex-shrink: 0; }
+  .impact-box.green-box {
+    background: rgba(34,197,94,.06);
+    border-color: rgba(34,197,94,.15);
+    color: #86efac;
+  }
+  .impact-box.green-box .arrow { color: var(--green); }
+
+  /* ── COMPARISON TABLE ── */
+  .comp-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 14px; }
+  .comp-table th {
+    background: var(--dark3);
+    padding: 10px 16px;
+    text-align: left;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+  }
+  .comp-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    color: #ccc;
+  }
+  .comp-table tr:last-child td { border-bottom: none; }
+  .comp-table td strong { color: var(--text); }
+
+  /* ── ICP BOX ── */
+  .icp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 20px;
+  }
+  @media (max-width: 600px) { .icp-grid { grid-template-columns: 1fr; } }
+  .icp-card {
+    background: var(--dark2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 22px;
+  }
+  .icp-card .profile-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--red);
+    margin-bottom: 6px;
+  }
+  .icp-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .icp-card p { font-size: 13px; color: #aaa; line-height: 1.55; }
+  .icp-card .quote {
+    font-style: italic;
+    color: #888;
+    font-size: 13px;
+    border-left: 2px solid var(--red);
+    padding-left: 10px;
+    margin-top: 10px;
+  }
+
+  /* ── TRUST LIST ── */
+  .trust-list { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .trust-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: var(--dark2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 14px;
+    color: #ccc;
+  }
+  .trust-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--dark3);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+
+  /* ── MPL BOX ── */
+  .mpl-box {
+    background: linear-gradient(135deg, rgba(220,38,38,.12) 0%, rgba(220,38,38,.04) 100%);
+    border: 1px solid rgba(220,38,38,.3);
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-top: 24px;
+  }
+  .mpl-box .mpl-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 6px;
+  }
+  .mpl-box h3 { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+  .mpl-box .mpl-sub { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
+  .mpl-entry-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .mpl-entry-card {
+    background: rgba(0,0,0,.3);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 8px;
+    padding: 14px;
+    text-align: center;
+  }
+  .mpl-entry-card .price { font-size: 22px; font-weight: 800; color: var(--text); }
+  .mpl-entry-card .entries { font-size: 13px; color: var(--red); font-weight: 700; margin: 2px 0; }
+  .mpl-entry-card .normal { font-size: 11px; color: var(--muted); }
+
+  /* ── ACTION TABLE ── */
+  .action-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 14px; }
+  .action-table th {
+    background: var(--dark3);
+    padding: 10px 16px;
+    text-align: left;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+  }
+  .action-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    color: #ccc;
+    vertical-align: top;
+  }
+  .action-table tr:last-child td { border-bottom: none; }
+  .action-table .date-col { color: var(--muted); font-size: 13px; white-space: nowrap; }
+  .action-table .who-col { color: var(--muted); font-size: 13px; }
+  .action-table td strong { color: var(--text); }
+
+  /* ── ROADMAP ── */
+  .roadmap { margin-top: 20px; display: flex; flex-direction: column; gap: 0; }
+  .roadmap-item {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .roadmap-item:last-child { border-bottom: none; }
+  .roadmap-date {
+    padding: 16px 20px 16px 0;
+    font-size: 12px;
+    color: var(--muted);
+    border-right: 1px solid var(--border);
+    font-weight: 600;
+  }
+  .roadmap-date span { display: block; font-size: 11px; color: var(--red); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
+  .roadmap-content { padding: 16px 0 16px 20px; }
+  .roadmap-content h4 { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+  .roadmap-content p { font-size: 13px; color: var(--muted); }
+  .roadmap-highlight { background: rgba(220,38,38,.04); }
+
+  /* ── NEEDS TABLE ── */
+  .needs-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 14px; }
+  .needs-table th {
+    background: var(--dark3);
+    padding: 10px 16px;
+    text-align: left;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+  }
+  .needs-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    color: #ccc;
+    vertical-align: top;
+  }
+  .needs-table tr:last-child td { border-bottom: none; }
+  .dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+    flex-shrink: 0;
+  }
+  .dot-red    { background: #dc2626; }
+  .dot-amber  { background: #f59e0b; }
+  .dot-yellow { background: #facc15; }
+  .urgency-cell { display: flex; align-items: center; white-space: nowrap; font-size: 13px; }
+
+  /* ── CLOSING NOTE ── */
+  .closing-note {
+    background: var(--dark2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px 32px;
+    margin-top: 24px;
+    font-size: 14px;
+    color: #aaa;
+    line-height: 1.7;
+  }
+  .closing-note strong { color: var(--text); }
+  .closing-note .highlight {
+    background: rgba(220,38,38,.06);
+    border: 1px solid rgba(220,38,38,.15);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-top: 16px;
+    font-size: 14px;
+    color: #e8c4c4;
+  }
+
+  /* ── FOOTER ── */
+  .report-footer {
+    background: var(--dark2);
+    border-top: 1px solid var(--border);
+    padding: 28px 40px;
+    text-align: center;
+    margin-top: 80px;
+  }
+  .report-footer .brand { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+  .report-footer .contacts { font-size: 12px; color: var(--muted); margin-top: 8px; }
+  .report-footer .contacts a { color: #666; text-decoration: none; }
+  .report-footer .confidential {
+    font-size: 11px;
+    color: #444;
+    margin-top: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  @media (max-width: 640px) {
+    .report-header { padding: 36px 20px 28px; }
+    .summary-bar { gap: 28px; padding: 24px 20px; }
+    .container { padding: 0 16px 60px; }
+    .roadmap-item { grid-template-columns: 1fr; }
+    .roadmap-date { border-right: none; border-bottom: 1px solid var(--border); padding: 12px 0 8px; }
+    .roadmap-content { padding: 10px 0 14px; }
+    .mpl-entry-grid { grid-template-columns: 1fr 1fr; }
+    .win-card { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header class="report-header">
+  <div class="eyebrow">El Solar Creative Group — Informe de Marketing</div>
+  <h1>Zero 2 Sixty<br><span>Diagnóstico + Estrategia</span></h1>
+  <p class="subtitle">Abril 2026 — 41 días de sorteo activo</p>
+  <div class="meta-pills">
+    <span class="pill"><strong>Para:</strong> Juan Ignacio Ariztmendi &amp; Darío Melo</span>
+    <span class="pill"><strong>De:</strong> Juan Manuel Plazas / El Solar</span>
+    <span class="pill"><strong>Fecha:</strong> 28 de abril de 2026</span>
+    <span class="pill"><strong>Draw Date:</strong> 18 de julio de 2026</span>
+  </div>
+</header>
+
+<!-- ═══ SUMMARY BAR ═══ -->
+<div class="summary-bar">
+  <div class="stat">
+    <span class="num">41</span>
+    <div class="lbl">Días activo</div>
+  </div>
+  <div class="stat">
+    <span class="num">32</span>
+    <div class="lbl">Órdenes totales</div>
+  </div>
+  <div class="stat">
+    <span class="num">$47</span>
+    <div class="lbl">Ticket promedio (AOV)</div>
+  </div>
+  <div class="stat">
+    <span class="num green">6.40x</span>
+    <div class="lbl">ROAS mejor anuncio</div>
+  </div>
+  <div class="stat">
+    <span class="num green">46%</span>
+    <div class="lbl">Open rate email</div>
+  </div>
+  <div class="stat">
+    <span class="num amber">81</span>
+    <div class="lbl">Días restantes</div>
+  </div>
+</div>
+
+<!-- ═══ ALERT BANNER — MPL-03 ═══ -->
+<div class="alert-banner">
+  <strong>MAY MULTIPLIER (MPL-03) abre el viernes 1 de mayo</strong> — 20x entradas en todos los productos. La estrategia de ejecución está en la Sección 4.
+</div>
+
+<div class="container">
+
+  <!-- ── INTRO ── -->
+  <div class="intro-block">
+    El Ducati Monster Sweepstakes lleva <strong>41 días activo</strong>. Se han completado <strong>32 órdenes</strong> a través de la plataforma. El programa de email está activo y generando tasas de apertura del <strong>46%</strong> — el doble del promedio de la industria. Hay un multiplicador de entradas que abre <strong>este viernes 1 de mayo</strong> y ya tenemos preparada la estrategia para ejecutarlo.<br><br>
+    Hay también tres ajustes técnicos y estratégicos que, una vez implementados, tienen el potencial de <strong>más que duplicar el número de compradores por mes sin aumentar el presupuesto de pauta</strong>. Eso es lo que detallamos en este informe.
+  </div>
+
+  <!-- ═══ SECCIÓN 1 — LO QUE ESTÁ FUNCIONANDO ═══ -->
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <h2>Lo que está funcionando</h2>
+    <span class="section-tag tag-working">SEÑALES POSITIVAS</span>
+  </div>
+
+  <!-- Win: modelo de negocio -->
+  <div class="win-card">
+    <div class="win-icon">✓</div>
+    <div>
+      <h3>El modelo de negocio está probado</h3>
+      <p>32 órdenes completadas en 41 días, con AOV de $46.81 — consistente con el benchmark del Sweepstakes #1 ($46.81 AOV en Teravnt). La mecánica de mercancía + entradas funciona. Hay compradores que han regresado varias veces, señal de confianza real en la plataforma.</p>
+      <div class="metric-row">
+        <div class="metric-chip"><span class="val">32</span><div class="key">Órdenes</div></div>
+        <div class="metric-chip"><span class="val">$46.81</span><div class="key">AOV</div></div>
+        <div class="metric-chip"><span class="val">41d</span><div class="key">Activo</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Win: email -->
+  <div class="win-card">
+    <div class="win-icon">✉</div>
+    <div>
+      <h3>El canal de email está activo y funcionando</h3>
+      <p>Los 3 flujos de email están activos desde el 27 de marzo (confirmado vía Klaviyo Reporting API): confirmación de compra, carrito abandonado y nurture de bienvenida. Cada orden completada dispara el email de confirmación automáticamente.</p>
+      <div class="metric-row">
+        <div class="metric-chip"><span class="val green">46.2%</span><div class="key">Open Rate</div></div>
+        <div class="metric-chip"><span class="val green">15.4%</span><div class="key">Click Rate</div></div>
+        <div class="metric-chip"><span class="val">2–5%</span><div class="key">Benchmark industria</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Win: creative ganador -->
+  <div class="win-card">
+    <div class="win-icon">★</div>
+    <div>
+      <h3>Hay un creative ganador — y es la base para escalar</h3>
+      <p>El anuncio <strong>MV02_1x1_v1_v1</strong> — un banner estático cuadrado con la imagen de la moto y el CTA directo — está generando 6.40x ROAS en los últimos 14 días. Por cada $1 invertido en ese anuncio, se generan $6.40 en ventas. Es el único anuncio con compras reales en este período. Vamos a escalarlo y a replicar su concepto.</p>
+      <div class="metric-row">
+        <div class="metric-chip"><span class="val green">6.40x</span><div class="key">ROAS</div></div>
+        <div class="metric-chip"><span class="val">Static 1:1</span><div class="key">Formato</div></div>
+        <div class="metric-chip"><span class="val green">+50%</span><div class="key">Budget objetivo</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SECCIÓN 2 — DIAGNÓSTICO ═══ -->
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <h2>El diagnóstico — Dónde se está perdiendo</h2>
+    <span class="section-tag tag-urgent">3 PUNTOS CLAVE</span>
+  </div>
+
+  <p style="color:#999; font-size:14px; margin-top:16px;">Cruzamos datos de Meta Ads, Shopify, Microsoft Clarity y Klaviyo API. Los tres problemas identificados tienen solución concreta.</p>
+
+  <!-- Problema A: CLS -->
+  <div class="problem-card">
+    <div class="problem-card-header">
+      <div class="problem-letter">A</div>
+      <h3>Un bug técnico está bloqueando al 46% de los visitantes</h3>
+    </div>
+    <div class="problem-card-body">
+      <p>El 69% del tráfico llega desde el navegador interno de apps de Meta (Instagram/Facebook). En ese entorno, hay un bug de CSS en la tienda — llamado <strong>CLS (Cumulative Layout Shift)</strong> — que hace que el botón "ENTER NOW" <strong>se mueva en el momento exacto en que el usuario va a hacer clic</strong>.</p>
+      <p>De cada 100 personas que hacen clic en un anuncio, solo 54 llegan a ver la landing page. Las otras 46 rebotan antes de interactuar.</p>
+      <div class="impact-box green-box">
+        <span class="arrow">→</span>
+        <span>Si se corrige este bug: de ~25 compras/mes a <strong>~42 compras estimadas con el mismo presupuesto</strong>. Trabajo estimado: 2-4 horas de desarrollador Shopify.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Problema B: Budget -->
+  <div class="problem-card">
+    <div class="problem-card-header">
+      <div class="problem-letter amber">B</div>
+      <h3>El presupuesto está repartido entre demasiados anuncios</h3>
+    </div>
+    <div class="problem-card-body">
+      <p>Actualmente hay 5+ anuncios corriendo con $8–10/día cada uno. El algoritmo de Meta necesita mínimo $50–100/día por anuncio para aprender qué usuarios tienen más probabilidad de comprar. Por debajo de ese umbral, el sistema está "adivinando" en lugar de optimizando.</p>
+      <p>Tenemos identificado el anuncio que sí funciona (6.40x ROAS). La acción: pausar los que no convierten, concentrar el presupuesto en el ganador, y activar retargeting para los <strong>93 usuarios que agregaron al carrito pero no compraron</strong>.</p>
+      <div class="impact-box">
+        <span class="arrow">→</span>
+        <span>93 carritos abandonados × $47 AOV = <strong>$4,371 en revenue potencial</strong> recuperable con retargeting a $15/día.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Problema C: Email list -->
+  <div class="problem-card">
+    <div class="problem-card-header">
+      <div class="problem-letter blue">C</div>
+      <h3>El email funciona — el siguiente paso es ampliar la lista</h3>
+    </div>
+    <div class="problem-card-body">
+      <p>El canal de email está activo y performando excelente. La oportunidad de crecimiento está en ampliar la base: la lista actual tiene <strong>52 personas, todos compradores</strong>. No hay captura de emails de visitantes que aún no han comprado.</p>
+      <p>Un pop-up de "suscríbete para novedades del sorteo" convertiría parte del tráfico pagado en una audiencia nutrurable, reduciendo la dependencia de pauta para cada venta futura.</p>
+      <div class="impact-box green-box">
+        <span class="arrow">→</span>
+        <span>Solución: pop-up básico con incentivo de entradas gratis. App Shopify disponible desde $0/mes. Sin desarrollo adicional.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SECCIÓN 3 — MERCADO ═══ -->
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <h2>El mercado — Qué dice la investigación</h2>
+    <span class="section-tag tag-intel">INTELIGENCIA ESTRATÉGICA</span>
+  </div>
+
+  <!-- Competidores -->
+  <h3 style="font-size:14px; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); margin-top:24px; margin-bottom:12px;">Competidores de referencia</h3>
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>Competidor</th>
+        <th>Premio actual</th>
+        <th>Revenue estimado</th>
+        <th>Ventaja clave</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>80EIGHTY</strong></td>
+        <td>Audi R8 + $60K cash ($325K valor)</td>
+        <td><strong style="color:var(--green);">~$189,000/mes</strong></td>
+        <td>83 sorteos de historial — página de ganadores prominente</td>
+      </tr>
+      <tr>
+        <td><strong>Red Line Society</strong></td>
+        <td>Jeep Wrangler + $50K cash</td>
+        <td>No público</td>
+        <td>"No necesitamos gastar mucho en marketing" — comunidad orgánica</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="impact-box" style="margin-top:14px;">
+    <span class="arrow">→</span>
+    <span>El draw del <strong>18 de julio</strong> producirá el activo más valioso: <strong>el primer ganador real y verificable de Zero 2 Sixty</strong>. Ese ganador, bien documentado, transforma cada sorteo futuro.</span>
+  </div>
+
+  <!-- ICP -->
+  <h3 style="font-size:14px; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); margin-top:32px; margin-bottom:4px;">El comprador de la Ducati Monster — Dos perfiles activos</h3>
+  <p style="font-size:13px; color:#666; margin-bottom:4px;">El propietario mediano de moto en EE.UU. tiene <strong style="color:#ccc;">50 años</strong> (MIC Survey, 2018). Los dos perfiles están comprando ahora.</p>
+
+  <div class="icp-grid">
+    <div class="icp-card">
+      <div class="profile-label">Perfil A — Creativos actuales</div>
+      <h4>El Aspirante (25–38)</h4>
+      <p>Aún no tiene moto pero quiere una Ducati. El sorteo es la entrada a un mundo al que aspira pertenecer.</p>
+      <div class="quote">"La Ducati que nunca podría comprarme, por $35."</div>
+    </div>
+    <div class="icp-card">
+      <div class="profile-label">Perfil B — Oportunidad sin atender</div>
+      <h4>El Rider (40–55)</h4>
+      <p>Ya tiene o tuvo motos. Valora la Monster como el upgrade de identidad del momento. Comprador con mayor poder adquisitivo.</p>
+      <div class="quote">"Upgrade de tribu por $35."</div>
+    </div>
+  </div>
+
+  <div class="impact-box green-box" style="margin-top:14px;">
+    <span class="arrow">→</span>
+    <span>Las mujeres compran la Monster en mayor proporción que cualquier otra Ducati. El ICP femenino está sin atender creativamente — ningún anuncio actual habla a ese perfil.</span>
+  </div>
+
+  <!-- Trust -->
+  <h3 style="font-size:14px; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); margin-top:32px; margin-bottom:12px;">La objeción #1 no es el precio — es la legitimidad</h3>
+  <p style="font-size:14px; color:#aaa; margin-bottom:4px;">El análisis de comportamiento muestra que <strong>18 usuarios fueron directamente a leer las Official Rules</strong> antes de cualquier otra acción. Los tres elementos que convierten esa duda en confianza:</p>
+
+  <div class="trust-list">
+    <div class="trust-item">
+      <div class="trust-num">1</div>
+      <span>Video de un <strong>comprador real</strong> mostrando su email de confirmación de entradas</span>
+    </div>
+    <div class="trust-item">
+      <div class="trust-num">2</div>
+      <span>Foto del <strong>VIN de la moto</strong> — prueba física de que el premio existe</span>
+    </div>
+    <div class="trust-item">
+      <div class="trust-num">3</div>
+      <span>Enlace a <strong>Official Rules visible arriba del contenido</strong>, no solo en el footer</span>
+    </div>
+  </div>
+
+  <!-- ═══ SECCIÓN 4 — MPL-03 ═══ -->
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <h2>Oportunidad inmediata — May Multiplier</h2>
+    <span class="section-tag tag-now">ESTE FIN DE SEMANA</span>
+  </div>
+
+  <div class="mpl-box">
+    <div class="mpl-label">MPL-03 — May Multiplier</div>
+    <h3>20x entradas — Viernes 1 de mayo al Domingo 3 de mayo</h3>
+    <p class="mpl-sub">72 horas. Sin extensiones. El pack de $35 pasa de 350 a <strong>700 entradas</strong>.</p>
+
+    <div class="mpl-entry-grid">
+      <div class="mpl-entry-card">
+        <div class="price">$35</div>
+        <div class="entries">700 entries</div>
+        <div class="normal">Normal: 350</div>
+      </div>
+      <div class="mpl-entry-card">
+        <div class="price">$45</div>
+        <div class="entries">900 entries</div>
+        <div class="normal">Normal: 540</div>
+      </div>
+      <div class="mpl-entry-card">
+        <div class="price">$60</div>
+        <div class="entries">1,200 entries</div>
+        <div class="normal">Normal: 900</div>
+      </div>
+      <div class="mpl-entry-card">
+        <div class="price">$75</div>
+        <div class="entries">1,500 entries</div>
+        <div class="normal">Normal: 750</div>
+      </div>
+      <div class="mpl-entry-card">
+        <div class="price">$99</div>
+        <div class="entries">1,980 entries</div>
+        <div class="normal">Normal: 1,980</div>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="font-size:14px; text-transform:uppercase; letter-spacing:0.5px; color:var(--muted); margin-top:24px; margin-bottom:4px;">Plan de ejecución</h3>
+  <table class="action-table">
+    <thead>
+      <tr>
+        <th>Acción</th>
+        <th>Cuándo</th>
+        <th>Responsable</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Email announcement a compradores actuales</td>
+        <td class="date-col">Mié 29 abr, 6 PM EST</td>
+        <td class="who-col">El Solar</td>
+      </tr>
+      <tr>
+        <td>Post orgánico de anuncio + VID-02</td>
+        <td class="date-col">Jue 30 abr</td>
+        <td class="who-col">Diego</td>
+      </tr>
+      <tr>
+        <td><strong>Confirmar 20x activo en Shopify</strong></td>
+        <td class="date-col">Vie 1 may, 12 AM EST</td>
+        <td class="who-col"><strong>Equipo Z2S</strong></td>
+      </tr>
+      <tr>
+        <td>Retargeting para los 93 carritos abandonados</td>
+        <td class="date-col">Desde miércoles</td>
+        <td class="who-col">El Solar</td>
+      </tr>
+      <tr>
+        <td>Stories urgencia "48h left" + "midnight tonight"</td>
+        <td class="date-col">Sáb + Dom</td>
+        <td class="who-col">Diego</td>
+      </tr>
+      <tr>
+        <td>Email cierre "Last call. Midnight tonight."</td>
+        <td class="date-col">Dom 3 may, 6 PM EST</td>
+        <td class="who-col">El Solar</td>
+      </tr>
+      <tr>
+        <td><strong>Revertir a 10x en Shopify</strong></td>
+        <td class="date-col">Lun 4 may, 12 AM</td>
+        <td class="who-col"><strong>Equipo Z2S</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ═══ SECCIÓN 5 — ROADMAP ═══ -->
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <h2>Roadmap — Próximos 30 días</h2>
+  </div>
+
+  <div class="roadmap" style="background:var(--dark2); border:1px solid var(--border); border-radius:10px; overflow:hidden; margin-top:20px;">
+    <div class="roadmap-item roadmap-highlight">
+      <div class="roadmap-date"><span>Semana 1</span>28 abr – 3 may</div>
+      <div class="roadmap-content">
+        <h4>MPL-03 + Consolidación de ads</h4>
+        <p>Ejecutar multiplicador. Pausar gasto ineficiente. Activar C02 retargeting.</p>
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-date"><span>Semana 2</span>4 may – 11 may</div>
+      <div class="roadmap-content">
+        <h4>Corrección técnica del sitio + UGC</h4>
+        <p>Corregir CLS. Contratar 1 creador de UGC rider. Configurar popup opt-in email.</p>
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-date"><span>Semana 3–4</span>12 may – 22 may</div>
+      <div class="roadmap-content">
+        <h4>Escalar lo que funciona</h4>
+        <p>MV02 + nuevo creative rider profile. C02 optimizado con aprendizaje de MPL-03.</p>
+      </div>
+    </div>
+    <div class="roadmap-item roadmap-highlight">
+      <div class="roadmap-date"><span>Evento</span>23–25 may</div>
+      <div class="roadmap-content">
+        <h4>MPL-04 — Memorial Day (15x)</h4>
+        <p>Segunda ventana de multiplicador del mes.</p>
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-date"><span>Cierre</span>Final de mayo</div>
+      <div class="roadmap-content">
+        <h4>Análisis Mes 2 + Estrategia Q2</h4>
+        <p>Primer reporte comparativo con datos de dos meses completos.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SECCIÓN 6 — LO QUE NECESITAMOS ═══ -->
+  <div class="section-header">
+    <div class="section-num">6</div>
+    <h2>Lo que necesitamos de su equipo</h2>
+    <span class="section-tag tag-urgent">ACCIONES REQUERIDAS</span>
+  </div>
+
+  <table class="needs-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Tarea</th>
+        <th>Urgencia</th>
+        <th>Quién</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="color:var(--muted)">1</td>
+        <td>Activar/desactivar 20x en Shopify para MPL-03 (viernes 1 mayo — lunes 4 mayo)</td>
+        <td><span class="urgency-cell"><span class="dot dot-red"></span>Esta semana</span></td>
+        <td style="color:var(--muted); font-size:13px;">Juan A. / Darío</td>
+      </tr>
+      <tr>
+        <td style="color:var(--muted)">2</td>
+        <td>Confirmar desarrollador disponible para corrección bug CLS (2-4 horas de trabajo, est. $150–300)</td>
+        <td><span class="urgency-cell"><span class="dot dot-red"></span>Esta semana</span></td>
+        <td style="color:var(--muted); font-size:13px;">Juan A.</td>
+      </tr>
+      <tr>
+        <td style="color:var(--muted)">3</td>
+        <td>Confirmar presupuesto para subir Meta Ads de $40/día a $100/día</td>
+        <td><span class="urgency-cell"><span class="dot dot-amber"></span>Esta semana</span></td>
+        <td style="color:var(--muted); font-size:13px;">Darío</td>
+      </tr>
+      <tr>
+        <td style="color:var(--muted)">4</td>
+        <td>Grabar las 6 tomas de video solicitadas por Diego (briefing de contenido adjunto)</td>
+        <td><span class="urgency-cell"><span class="dot dot-amber"></span>Próximos 7 días</span></td>
+        <td style="color:var(--muted); font-size:13px;">Juan A. / Darío</td>
+      </tr>
+      <tr>
+        <td style="color:var(--muted)">5</td>
+        <td>Confirmar presupuesto para contratar 2–3 creadores UGC rider (est. $200–600 total, vía Billo o Fiverr)</td>
+        <td><span class="urgency-cell"><span class="dot dot-yellow"></span>Próximas 2 semanas</span></td>
+        <td style="color:var(--muted); font-size:13px;">Darío</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ═══ SECCIÓN 7 — LARGO PLAZO ═══ -->
+  <div class="section-header">
+    <div class="section-num">7</div>
+    <h2>Una nota sobre el largo plazo</h2>
+  </div>
+
+  <div class="closing-note">
+    El análisis de los competidores líderes del sector revela un patrón claro: los que tienen los <strong>costos de adquisición más bajos construyeron comunidad antes de depender de publicidad pagada</strong>. Zero 2 Sixty está en el primer sorteo — el más costoso de aprender. Ese es el contexto de todos los números que estamos viendo.<br><br>
+    La comunidad orgánica que está empezando a construir Diego, los creadores UGC que vamos a activar, y el contenido de Clutchero son las piezas que en el Mes 3 y 4 van a hacer que el costo de adquirir cada comprador baje sustancialmente.<br><br>
+    Lo que hacemos ahora es preparar esa plataforma mientras el Sweepstakes corre su curso.
+    <div class="highlight">
+      El draw del <strong>18 de julio</strong> va a producir el activo más valioso que el negocio puede tener: <strong>el primer ganador real y verificable de Zero 2 Sixty</strong>. Ese ganador, bien documentado (video, foto con la moto, testimonio), transforma cada sorteo futuro en un negocio completamente diferente.
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="report-footer">
+  <div class="brand">El Solar Creative Group</div>
+  <div class="contacts">
+    Juan Manuel Plazas — <a href="mailto:juan@elsolaragencia.co">juan@elsolaragencia.co</a>
+    &nbsp;·&nbsp;
+    Alejandra Díaz — <a href="mailto:alejandradiaz@elsolaragencia.co">alejandradiaz@elsolaragencia.co</a>
+  </div>
+  <div class="confidential">Informe confidencial — 28 de abril de 2026</div>
+</footer>
+
+</body>
+</html>

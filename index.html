@@ -1016,9 +1016,87 @@
     </tbody>
   </table>
 
-  <!-- ═══ SECCIÓN 7 — LARGO PLAZO ═══ -->
+  <!-- ═══ SECCIÓN 7 — CARGOS META ═══ -->
   <div class="section-header">
     <div class="section-num">7</div>
+    <h2>Los cargos de $72 de Meta — Qué está pasando</h2>
+    <span class="section-tag tag-intel">RESPUESTA VERIFICADA</span>
+  </div>
+
+  <p style="color:#999; font-size:14px; margin-top:16px;">Juan preguntó en la reunión por qué están llegando cargos exactos de $72 todos los días. Verificamos contra la API de Meta y los datos de gasto diario. Aquí está la respuesta completa.</p>
+
+  <div class="problem-card" style="margin-top:20px;">
+    <div class="problem-card-header">
+      <div class="problem-letter" style="background:var(--blue);">1</div>
+      <h3>Los cargos son legítimos — No es un error ni fraude</h3>
+    </div>
+    <div class="problem-card-body">
+      <p>Meta no cobra en tiempo real conforme gasta. Acumula el gasto corriente y cuando ese acumulado llega a un umbral fijo (el <strong>billing threshold</strong>), carga la tarjeta. El threshold de la cuenta está actualmente en <strong>$72</strong>.</p>
+      <p>El historial de la cuenta lo confirma: primero los cargos eran de montos variables (menores), luego llegaron a $55 exactos (dos veces el 17 de abril), y Meta subió el threshold a $72 después de esos dos pagos exitosos. Desde entonces, cada cargo es exactamente $72.</p>
+      <div class="impact-box green-box" style="margin-top:12px;">
+        <span class="arrow">→</span>
+        <span>Esto es comportamiento normal del sistema de facturación de Meta. Los cargos de $55 y $72 no son aleatorios — son el threshold progresando: $25 → $50 → $55 → $72 → (próximo: ~$100). Cada vez que la cuenta paga exitosamente, Meta sube el threshold al siguiente nivel.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="problem-card">
+    <div class="problem-card-header">
+      <div class="problem-letter amber">2</div>
+      <h3>Por qué está llegando uno por día — El gasto real subió</h3>
+    </div>
+    <div class="problem-card-body">
+      <p>Si el threshold es $72 y el cargo llega una vez al día, significa que la cuenta está gastando aproximadamente $72/día. Verificamos el gasto diario real directamente en la API de Meta:</p>
+
+      <table class="comp-table" style="margin-top:14px;">
+        <thead>
+          <tr><th>Fecha</th><th>Gasto real</th><th>Nota</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Abr 16</td><td><strong style="color:#f87171;">$89.14</strong></td><td style="color:#888; font-size:13px;">Pico — día de activación de AS05 (Banners)</td></tr>
+          <tr><td>Abr 17–19</td><td>$33–47/día</td><td style="color:#888; font-size:13px;">Normalización post-pico</td></tr>
+          <tr><td>Abr 23</td><td><strong style="color:#f87171;">$68.99</strong></td><td style="color:#888; font-size:13px;">Activación de AS06 (Carruseles) — gasto sube</td></tr>
+          <tr><td>Abr 24</td><td><strong style="color:#f87171;">$69.03</strong></td><td style="color:#888; font-size:13px;">Threshold $72 se alcanza en ~1 día → cargo diario</td></tr>
+          <tr><td>Abr 25</td><td><strong style="color:#f87171;">$68.25</strong></td><td style="color:#888; font-size:13px;">Mismo patrón — cargo diario</td></tr>
+          <tr><td>Abr 26</td><td>$53.31</td><td style="color:#888; font-size:13px;">Empieza a estabilizarse</td></tr>
+          <tr><td>Abr 27</td><td>$40.52</td><td style="color:#888; font-size:13px;">Vuelve al rango normal</td></tr>
+        </tbody>
+      </table>
+
+      <div class="impact-box" style="margin-top:14px;">
+        <span class="arrow">→</span>
+        <span>La causa del aumento: el 23 de abril se activó el ad set de Carruseles (AS06), que sumó gasto incremental y subió el diario de ~$40 a ~$68–70. Cuando el gasto diario se acerca al threshold de $72, este se alcanza en aproximadamente un día → un cargo diario. <strong>Los últimos días ya muestran la normalización: Abr 26 = $53, Abr 27 = $40.</strong></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="problem-card">
+    <div class="problem-card-header">
+      <div class="problem-letter" style="background:var(--green);">3</div>
+      <h3>Qué hacer de aquí en adelante</h3>
+    </div>
+    <div class="problem-card-body">
+      <p>Los cargos van a seguir llegando con ese patrón mientras la cuenta esté activa. Lo que cambia es la frecuencia: si el gasto diario baja, el threshold se tarda más en alcanzarse y los cargos son menos frecuentes.</p>
+      <div class="trust-list" style="margin-top:12px;">
+        <div class="trust-item">
+          <div class="trust-num">A</div>
+          <span><strong>No hay nada que "arreglar"</strong> en el sistema de cargos — es el comportamiento correcto de Meta.</span>
+        </div>
+        <div class="trust-item">
+          <div class="trust-num">B</div>
+          <span>Para tener visibilidad exacta: Meta Ads Manager → Billing & Payments → Payment History muestra cada cargo con la fecha exacta y el período de gasto que cubre.</span>
+        </div>
+        <div class="trust-item">
+          <div class="trust-num">C</div>
+          <span>Si quieren poner un límite de gasto mensual, Meta permite configurar un <strong>Account Spending Limit</strong> en Billing Settings para que la cuenta no supere un monto total en el mes.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SECCIÓN 8 — LARGO PLAZO ═══ -->
+  <div class="section-header">
+    <div class="section-num">8</div>
     <h2>Una nota sobre el largo plazo</h2>
   </div>
 
